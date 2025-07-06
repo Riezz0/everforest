@@ -21,4 +21,11 @@ cd /home/$USER/dots/
 
 5. Enjoy !!!!
 
-NB:: This is still a W.I.P XD
+This is still a W.I.P XD
+
+Important Notes:
+
+1. This setup might not be compatible with your setup. 
+2. This has been setup using a fresh install of ARCH and Hypland with the Linx-Zen Kernel and lightdm-gtk-greeter.
+3. Install pywalfox for theming the firefox browser.
+
