@@ -138,3 +138,7 @@ sudo cp -r /home/$USER/dots/sys/lightdm/ /etc/
 wal -i ~/.config/walls/active.jpg  
 
 echo "Installation Complete !!!"
+echo "Rebooting The System"
+
+sleep 3
+sudo systemctl reboot
