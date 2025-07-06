@@ -116,12 +116,16 @@ sudo cp -r /home/$USER/dots/walls/active.jpg /usr/share/backgrounds/
 sudo cp -r /home/$USER/dots/.icons/oomox-everforest /usr/share/icons/
 sudo cp -r /home/$USER/dots/.themes/oomox-everforest /usr/share/themes/
 
+
 echo "Applying Theme"
 Sleep 3
+
+
 gsettings set org.gnome.desktop.interface icon-theme oomox-everforest
 gsettings set org.gnome.desktop.interface gtk-theme oomox-everforest
 gsettings set org.gnome.desktop.interface cursor-theme Future-dark-cursors
 gsettings set org.gnome.desktop.interface font-name Hurmit Nerd Font Mono Bold 11
 
+sudo cp -r /home/$USER/dots/sys/lightdm/ /etc/
 
 echo "Installation Complete !!!"
