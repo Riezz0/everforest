@@ -3,19 +3,22 @@
 
 Installation:
 
-1. 
+1. Clone the repo: 
 ```bash
-https://github.com/Riezz0/everforest.git /home/$USER/dots/
+git clone https://github.com/Riezz0/everforest.git /home/$USER/dots/
 ```
-2. 
+2. Change executeable permissions
 ```
 chmod +x /home/$USER/dots/setup.sh
 ```
 
-2. run setup.sh
+3. Run the setup - Ensure you are in the /home/$USER/dots director
+```bash
+cd /home/$USER/dots/
+```
 
-3. Ensure you type "exit" once oh-my-zsh has installed so that the remainder of the installation may continue
+4. Ensure you type "exit" once oh-my-zsh has installed so that the remainder of the installation may continue
 
-4. Enjoy !!!!
+5. Enjoy !!!!
 
 NB:: This is still a W.I.P XD
