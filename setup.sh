@@ -89,6 +89,9 @@ sleep 3
 ln -s /home/$USER/dots/.zshrc /home/$USER/
 rm -rf /home/$USER/dots/omz/
 
+rm -rf /home/$USER/.config/hypr
+rm -rf /home/$USER/.config/kitty
+
 ln -s /home/$USER/dots/fastfetch/ /home/$USER/.config/
 ln -s /home/$USER/dots/gtk-3.0/ /home/$USER/.config/
 ln -s /home/$USER/dots/gtk-4.0/ /home/$USER/.config/
@@ -127,5 +130,7 @@ gsettings set org.gnome.desktop.interface cursor-theme Future-dark-cursors
 gsettings set org.gnome.desktop.interface font-name Hurmit Nerd Font Mono Bold 11
 
 sudo cp -r /home/$USER/dots/sys/lightdm/ /etc/
+
+wal -i ~/.config/walls/active.jpg  
 
 echo "Installation Complete !!!"
