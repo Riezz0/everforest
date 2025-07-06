@@ -54,7 +54,9 @@ yay -S --needed --noconfirm \
 	waybar-module-pacman-updates-git \
 	python-pip \
 	python-virtualenv \
-	xfce4-settings
+	xfce4-settings \
+	rofi-wayland \
+
 
 #-----Oh-My-Zsh-----#
 
