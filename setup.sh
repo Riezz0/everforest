@@ -125,12 +125,13 @@ sudo cp -r /home/$USER/dots/.themes/oomox-everforest /usr/share/themes/
 echo "Applying Theme"
 Sleep 3
 
-
-gsettings set org.gnome.desktop.interface icon-theme oomox-everforest
-gsettings set org.gnome.desktop.interface gtk-theme oomox-everforest
-gsettings set org.gnome.desktop.interface cursor-theme Future-dark-cursors
-gsettings set org.gnome.desktop.interface font-name Hurmit Nerd Font Mono Bold 11
-nwg-look -a icon oomox-everforest 
+gsettings set org.gnome.desktop.interface cursor-theme "Future-dark-cursors"
+gsettings set org.gnome.desktop.interface icon-theme "oomox-everforest"
+gsettings set org.gnome.desktop.interface gtk-theme "oomox-everforest"
+gsettings set org.gnome.desktop.interface font-name "Hurmit Nerd Font Regular 11"
+gsettings set org.gnome.desktop.interface document-font-name "Hurmit Nerd Font Regular 11"
+gsettings set org.gnome.desktop.interface monospace-font-name "Hurmit Nerd Font Mono Regular 11"
+gsettings set org.gnome.desktop.wm.preferences titlebar-font "Hurmit Nerd Font Regular 11"
 
 sudo cp -r /home/$USER/dots/sys/lightdm/ /etc/
 
