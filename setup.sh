@@ -108,8 +108,8 @@ ln -s /home/$USER/dots/.vim/ /home/$USER/
 echo "Symlinking Sys Configs"
 sleep 3
 sudo rm -rf /usr/share/icons/default
-sudo ln -s /home/$USER/dots/sys/default /usr/share/icons/
-sudo ln -s /home/$USER/dots/sys/Future-dark-cursors /usr/share/icons/
+sudo cp -r /home/$USER/dots/sys/default /usr/share/icons/
+sudo cp -r /home/$USER/dots/sys/Future-dark-cursors /usr/share/icons/
 
 sudo mkdir -p /usr/share/backgrounds/
 sudo cp -r /home/$USER/dots/walls/active.jpg /usr/share/backgrounds/
