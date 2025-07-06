@@ -130,6 +130,7 @@ gsettings set org.gnome.desktop.interface icon-theme oomox-everforest
 gsettings set org.gnome.desktop.interface gtk-theme oomox-everforest
 gsettings set org.gnome.desktop.interface cursor-theme Future-dark-cursors
 gsettings set org.gnome.desktop.interface font-name Hurmit Nerd Font Mono Bold 11
+nwg-look -a icon oomox-everforest 
 
 sudo cp -r /home/$USER/dots/sys/lightdm/ /etc/
 
