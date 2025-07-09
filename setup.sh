@@ -99,6 +99,7 @@ ln -s /home/$USER/dots/gtk-3.0/ /home/$USER/.config/
 ln -s /home/$USER/dots/gtk-4.0/ /home/$USER/.config/
 ln -s /home/$USER/dots/hypr/ /home/$USER/.config/
 ln -s /home/$USER/dots/kitty/ /home/$USER/.config/
+ln -s /home/$USER/dots/nvim/ /home/$USER/.config/
 ln -s /home/$USER/dots/oomox-qtstyleplugin/ /home/$USER/.config/
 ln -s /home/$USER/dots/qt5ct/ /home/$USER/.config/
 ln -s /home/$USER/dots/qt6ct/ /home/$USER/.config/
