@@ -39,7 +39,7 @@ yay -S --needed --noconfirm \
 	python-pywal16 \
 	python-pywalfox \
 	zsh \
-	otf-hermit-nerd \
+	ttf-jetbrains-mono-nerd
 	ttf-font-awesome \
 	ttf-font-awesome-4 \
 	ttf-font-awesome-5 \
@@ -55,6 +55,7 @@ yay -S --needed --noconfirm \
 	python-pip \
 	python-virtualenv \
 	xfce4-settings \
+	exa \
 	rofi-wayland \
 
 
@@ -128,10 +129,10 @@ Sleep 3
 gsettings set org.gnome.desktop.interface cursor-theme "Future-dark-cursors"
 gsettings set org.gnome.desktop.interface icon-theme "oomox-everforest"
 gsettings set org.gnome.desktop.interface gtk-theme "oomox-everforest"
-gsettings set org.gnome.desktop.interface font-name "Hurmit Nerd Font Regular 11"
-gsettings set org.gnome.desktop.interface document-font-name "Hurmit Nerd Font Regular 11"
-gsettings set org.gnome.desktop.interface monospace-font-name "Hurmit Nerd Font Mono Regular 11"
-gsettings set org.gnome.desktop.wm.preferences titlebar-font "Hurmit Nerd Font Regular 11"
+gsettings set org.gnome.desktop.interface font-name "Jetbrains Mono Nerd Font Propo Bold 11"
+gsettings set org.gnome.desktop.interface document-font-name "Jetbrains Mono Nerd Font Propo Bold 11"
+gsettings set org.gnome.desktop.interface monospace-font-name "Jetbrains Mono Nerd Font Propo Bold 11"
+gsettings set org.gnome.desktop.wm.preferences titlebar-font "Jetbrains Mono Nerd Font Propo Bold 11"
 
 sudo cp -r /home/$USER/dots/sys/lightdm/ /etc/
 

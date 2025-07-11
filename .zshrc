@@ -15,3 +15,4 @@ source $ZSH/oh-my-zsh.sh
 
 # aliases
 alias v="nvim"
+alias ls="exa -lag --icons"

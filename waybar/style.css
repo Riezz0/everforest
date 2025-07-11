@@ -1,8 +1,8 @@
 @import "colors.css";
 * {
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: Hurmit Nerd Font Propo;
-    font-size: 13;
+    font-family: Jetbrains Mono Nerd Font Propo;
+    font-size: 15;
 }
 
 window#waybar {
@@ -76,6 +76,20 @@ button:hover {
 }
 
 #custom-logo {
+    background-color: @color0;
+    color: @color1;  /* change color */
+    border-radius: 5px;
+    padding-right: 12px;  /* adjust padding */
+    padding-left: 12px;  /* adjust padding */
+    padding-top: 5px;  /* adjust padding */
+    padding-bottom: 4px;  /* adjust padding */
+    border-bottom: 2px solid @color1;
+    border-top: 2px solid @color1;
+    border-left: 2px solid @color1;
+    border-right: 2px solid @color1;
+}
+
+#custom-updates {
     background-color: @color0;
     color: @color1;  /* change color */
     border-radius: 5px;
@@ -217,6 +231,21 @@ button:hover {
     border-bottom: 2px solid @color4;
     border-left: 2px solid @color4;
     border-right: 2px solid @color4;
+
+}
+
+#custom-salaat {
+    background-color: @color0;
+    color: @color1;
+    padding-right: 12px;
+    padding-left: 9px;
+    padding-top: 8px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    border-bottom: 2px solid @color1;
+    border-top: 2px solid @color1;
+    border-left: 2px solid @color1;
+    border-right: 2px solid @color1;
 
 }
 
