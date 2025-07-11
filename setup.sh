@@ -109,7 +109,6 @@ ln -s /home/$USER/dots/walls/ /home/$USER/.config/
 ln -s /home/$USER/dots/waybar/ /home/$USER/.config/
 ln -s /home/$USER/dots/.icons/ /home/$USER/
 ln -s /home/$USER/dots/.themes/ /home/$USER/
-ln -s /home/$USER/dots/.vim/ /home/$USER/
 
 echo "Symlinking Sys Configs"
 sleep 3
