@@ -5,7 +5,7 @@ fastfetch
 export ZSH="$HOME/.oh-my-zsh"
 
 # Theme
-ZSH_THEME="robbyrussell"
+ZSH_THEME="agnoster"
 
 # Plugins
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting zsh-autocomplete autoswitch_virtualenv $plugins)

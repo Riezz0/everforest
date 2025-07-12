@@ -180,7 +180,24 @@ button:hover {
     margin-left: -5px;
     border-bottom-right-radius: 5px;
     border-top-right-radius: 5px;
+} 
+
+#custom-power {
+    background-color: @color0;
+    color: @color3;  /* change color */
+    border-radius: 5px;
+    padding-right: 12px;  /* adjust padding */
+    padding-left: 12px;  /* adjust padding */
+    padding-top: 5px;  /* adjust padding */
+    padding-bottom: 4px;  /* adjust padding */
+    border-bottom: 2px solid @color3;
+    border-top: 2px solid @color3;
+    border-right: 2px solid @color3;
+    border-left: 2px solid @color3;
+
+
 }
+
 
 #pulseaudio {
     background-color: @color0;

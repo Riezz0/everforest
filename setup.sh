@@ -31,6 +31,8 @@ sleep 3
 yay -S --needed --noconfirm \
 	hyprpaper \
 	hyprshot \
+	hypridle \
+	hyprlock \
 	hyprpicker \
 	wl-clipboard \
 	firefox \
@@ -54,6 +56,7 @@ yay -S --needed --noconfirm \
 	waybar-module-pacman-updates-git \
 	python-pip \
 	python-virtualenv \
+	python-gobject \
 	xfce4-settings \
 	exa \
 	rofi-wayland \
