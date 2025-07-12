@@ -1,165 +1,159 @@
 #!/usr/bin/env python3
+
 import gi
 import subprocess
 import json
 import os
-from pathlib import Path
 
-gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gdk, Pango
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk, Gdk
 
 class PowerMenu(Gtk.Window):
     def __init__(self):
         super().__init__(title="Power Menu")
         
-        # Load Pywal colors
+        # Load pywal colors
         self.pywal_colors = self.load_pywal_colors()
         
-        # Set window properties
-        self.set_default_size(320, 450)
-        self.set_border_width(15)
-        self.set_position(Gtk.WindowPosition.CENTER)
+        # Window setup
+        self.set_default_size(400, 100)
         self.set_resizable(False)
         self.set_decorated(False)
+        self.set_position(Gtk.WindowPosition.CENTER)
         self.set_skip_taskbar_hint(True)
         
-        # Apply Pywal colors
-        self.apply_colors()
+        # Apply styles
+        self.apply_styles()
         
-        # Create main box
-        self.box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
+        # Create main container
+        self.box = Gtk.Box(spacing=10)
+        self.box.set_homogeneous(True)
+        self.box.set_margin_top(10)
+        self.box.set_margin_bottom(10)
+        self.box.set_margin_left(10)
+        self.box.set_margin_right(10)
         self.add(self.box)
         
-        # Add header
-        self.add_header()
-        
-        # Add buttons with different color accents
-        self.add_button("  Lock", self.lock, color_idx=1)
-        self.add_button("  Logout", self.logout, color_idx=2)
-        self.add_button("  Reboot", self.reboot, color_idx=3)
-        self.add_button("  Shutdown", self.shutdown, color_idx=4)
-        self.add_button("  Cancel", self.close, color_idx=5)
-        
+        # Create buttons
+        self.create_button("", "Lock", self.on_lock_clicked)
+        self.create_button("", "Logout", self.on_logout_clicked)
+        self.create_button("", "Shutdown", self.on_shutdown_clicked)
+        self.create_button("", "Reboot", self.on_reboot_clicked)
+    
     def load_pywal_colors(self):
-        """Load Pywal colors from colors.json"""
-        colors_file = Path(os.path.expanduser("~/.cache/wal/colors.json"))
-        if colors_file.exists():
-            with open(colors_file) as f:
-                return json.load(f)
-        return None
+        """Load colors from pywal"""
+        colors_path = os.path.expanduser("~/.cache/wal/colors.json")
+        try:
+            with open(colors_path) as f:
+                colors = json.load(f)
+            return {
+                'background': colors['special']['background'],
+                'foreground': colors['special']['foreground'],
+                'color0': colors['colors']['color0'],
+                'color1': colors['colors']['color1'],
+                'color2': colors['colors']['color2'],
+                'color3': colors['colors']['color3'],
+            }
+        except:
+            # Fallback colors if pywal isn't available
+            return {
+                'background': '#282a36',
+                'foreground': '#f8f8f2',
+                'color0': '#21222c',
+                'color1': '#ff5555',
+                'color2': '#50fa7b',
+                'color3': '#ffb86c',
+            }
     
-    def hex_to_rgb(self, hex_color):
-        """Convert hex color to RGB values (0-1 range)"""
-        hex_color = hex_color.lstrip('#')
-        return tuple(int(hex_color[i:i+2], 16)/255 for i in (0, 2, 4))
-    
-    def apply_colors(self):
-        """Apply Pywal colors to the window with varied color usage"""
-        if not self.pywal_colors:
-            return
-            
-        # Get colors
-        bg_color = self.hex_to_rgb(self.pywal_colors['special']['background'])
-        fg_color = self.hex_to_rgb(self.pywal_colors['special']['foreground'])
-        colors = [self.hex_to_rgb(c) for c in self.pywal_colors['colors'].values()]
-        
-        # Create CSS with GTK3-compatible properties
+    def apply_styles(self):
+        """Apply CSS styling with pywal colors"""
         css = f"""
         window {{
-            background-color: rgba({bg_color[0]*255}, {bg_color[1]*255}, {bg_color[2]*255}, 0.95);
-            border-radius: 15px;
-            border: 2px solid rgba({colors[0][0]*255}, {colors[0][1]*255}, {colors[0][2]*255}, 0.4);
-            box-shadow: 0 4px 20px 4px rgba(0, 0, 0, 0.3);
-        }}
-        
-        .header {{
-            color: rgba({fg_color[0]*255}, {fg_color[1]*255}, {fg_color[2]*255}, 0.9);
-            font-size: 18px;
-            margin-bottom: 15px;
+            background-color: {self.pywal_colors['background']};
+            border-radius: 5px;
+            border: 1px solid {self.pywal_colors['color0']};
         }}
         
         button {{
-            background-color: rgba({bg_color[0]*255}, {bg_color[1]*255}, {bg_color[2]*255}, 0.7);
-            color: rgba({fg_color[0]*255}, {fg_color[1]*255}, {fg_color[2]*255}, 1);
-            border-radius: 8px;
-            padding: 12px;
-            font-size: 16px;
-            transition: background-color 0.2s ease;
+            background-color: {self.pywal_colors['color0']};
+            color: {self.pywal_colors['foreground']};
+            border-radius: 5px;
             border: none;
-            outline: none;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            font-family: "Font Awesome 6 Free", sans-serif;
         }}
         
         button:hover {{
-            background-color: rgba({colors[0][0]*255}, {colors[0][1]*255}, {colors[0][2]*255}, 0.3);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            background-color: {self.pywal_colors['color3']};
+            color: {self.pywal_colors['background']};
         }}
         
-        .color1 {{ border-left: 5px solid rgba({colors[0][0]*255}, {colors[0][1]*255}, {colors[0][2]*255}, 0.8); }}
-        .color2 {{ border-left: 5px solid rgba({colors[1][0]*255}, {colors[1][1]*255}, {colors[1][2]*255}, 0.8); }}
-        .color3 {{ border-left: 5px solid rgba({colors[2][0]*255}, {colors[2][1]*255}, {colors[2][2]*255}, 0.8); }}
-        .color4 {{ border-left: 5px solid rgba({colors[3][0]*255}, {colors[3][1]*255}, {colors[3][2]*255}, 0.8); }}
-        .color5 {{ border-left: 5px solid rgba({colors[4][0]*255}, {colors[4][1]*255}, {colors[4][2]*255}, 0.8); }}
+        .danger:hover {{
+            background-color: {self.pywal_colors['color1']};
+            color: {self.pywal_colors['background']};
+        }}
+        
+        .success:hover {{
+            background-color: {self.pywal_colors['color2']};
+            color: {self.pywal_colors['background']};
+        }}
         """
         
-        provider = Gtk.CssProvider()
-        provider.load_from_data(css.encode())
+        style_provider = Gtk.CssProvider()
+        style_provider.load_from_data(css.encode())
+        
         Gtk.StyleContext.add_provider_for_screen(
             Gdk.Screen.get_default(),
-            provider,
+            style_provider,
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
         )
     
-    def add_header(self):
-        """Add a styled header to the menu"""
-        header = Gtk.Label(label="Power Options")
-        header.set_name("header")
-        header.set_justify(Gtk.Justification.CENTER)
+    def create_button(self, icon, label, callback):
+        """Create a styled button with icon and label"""
+        btn = Gtk.Button()
+        btn.set_tooltip_text(label)
         
-        # Set font weight
-        attr = Pango.AttrList()
-        attr.insert(Pango.AttrWeight.new(Pango.Weight.BOLD))
-        header.set_attributes(attr)
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
+        icon_label = Gtk.Label(label=icon)
+        icon_label.set_name("icon-label")
+        text_label = Gtk.Label(label=label)
         
-        self.box.pack_start(header, False, False, 0)
+        box.pack_start(icon_label, True, True, 0)
+        box.pack_start(text_label, True, True, 0)
+        btn.add(box)
+        
+        # Add danger class to shutdown and reboot
+        if label in ["Shutdown", "Reboot"]:
+            btn.get_style_context().add_class("danger")
+        elif label == "Logout":
+            btn.get_style_context().add_class("danger")
+        else:
+            btn.get_style_context().add_class("success")
+        
+        btn.connect("clicked", callback)
+        self.box.pack_start(btn, True, True, 0)
     
-    def add_button(self, label, callback, color_idx):
-        """Add a styled button with specific color accent"""
-        button = Gtk.Button(label=label)
-        button.connect("clicked", callback)
-        button.set_name(f"color{color_idx}")
-        
-        # Add some margin
-        button.set_margin_bottom(5)
-        
-        self.box.pack_start(button, True, True, 0)
-    
-    def lock(self, button):
-        """Lock the screen using hyprlock"""
+    def on_lock_clicked(self, widget):
         subprocess.Popen(["hyprlock"])
-        self.close()
+        self.destroy()
     
-    def shutdown(self, button):
-        """Shutdown the system"""
+    def on_logout_clicked(self, widget):
+        subprocess.Popen(["hyprctl", "dispatch", "exit"])
+        self.destroy()
+    
+    def on_shutdown_clicked(self, widget):
         subprocess.Popen(["systemctl", "poweroff"])
-        self.close()
+        self.destroy()
     
-    def reboot(self, button):
-        """Reboot the system"""
+    def on_reboot_clicked(self, widget):
         subprocess.Popen(["systemctl", "reboot"])
-        self.close()
-    
-    def logout(self, button):
-        """Logout from the session"""
-        subprocess.Popen(["loginctl", "terminate-user", os.getenv("USER")])
-        self.close()
-    
-    def close(self, button=None):
-        """Close the window"""
-        Gtk.main_quit()
+        self.destroy()
 
-if __name__ == "__main__":
+def main():
     win = PowerMenu()
     win.connect("destroy", Gtk.main_quit)
     win.show_all()
     Gtk.main()
+
+if __name__ == "__main__":
+    main()
